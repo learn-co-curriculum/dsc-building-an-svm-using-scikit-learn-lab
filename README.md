@@ -76,10 +76,7 @@ We'll start with this data set and fit a simple linear support vector machine on
 
 
 ```python
-from sklearn import svm
-
-clf = svm.SVC(kernel='linear')
-clf.fit(X_1, y_1)
+# Your code here
 ```
 
 
@@ -96,13 +93,12 @@ Let's save the first feature (on the horizontal axis) as X_11 and the second fea
 
 
 ```python
-X_11= X_1[:,0]
-X_12= X_1[:,1]
+# Your code here
 ```
 
 
 ```python
-clf.coef_
+# Your code here
 ```
 
 
@@ -116,33 +112,28 @@ Next, let's store the min and maximum values X_11 and X_12 operate in. We'll use
 
 
 ```python
-# plot the decision function
-X11_min, X11_max = X_11.min() - 1, X_11.max() + 1
-X12_min, X12_max = X_12.min() - 1, X_12.max() + 1
+# Your code here
 ```
 
 Next, we'll create a grid. You can do this by using the numpy function `linspace`, which creates a numpy array with evenly spaced numbers over a specified interval. The default of numbers is 50 and we don't need that many, so let's specify `num = 10` for now. You'll see that you need to take a higher number once we get to classification of more than 2 groups.
 
 
 ```python
-x11_coord = np.linspace(X11_min, X11_max, 10)
-x12_coord = np.linspace(X12_min, X12_max, 10)
+# Your code here
 ```
 
 To create our decision boundary, you'll need to create a mesh of points to plot in. You can do this by using `np.meshgrid` with the two arguments equal to the `np.linspace` objects created for X11 and X12.
 
 
 ```python
-X12_C, X11_C = np.meshgrid(x12_coord, x11_coord)
+# Your code here
 ```
 
 Now we want to create a numpy array of the shape (100, 2) that concatenates the coordinates for X11 and X12 together in one numpy object. Use `np.c_` and make sure to use `.ravel()` first. Use `np.shape()` on your resulting object first to verify the resulting shape.
 
 
 ```python
-x11x12 = np.c_[X11_C.ravel(), X12_C.ravel()]
-
-np.shape(x11x12)
+# Your code here
 ```
 
 
@@ -156,8 +147,7 @@ Bow we want to get a decision boundary for this particular data set. Using your 
 
 
 ```python
-df1 = clf.decision_function(x11x12)
-df1 = df1.reshape(X12_C.shape)
+# Your code here
 ```
 
 Now, let's plot our data again with the result of svm in it. 
@@ -168,10 +158,7 @@ Now, let's plot our data again with the result of svm in it.
 
 
 ```python
-plt.scatter(X_11, X_12, c = y_1)
-axes = plt.gca()
-axes.contour(X11_C, X12_C, df1, colors=["blue","black","blue"], levels= [-1, 0, 1], linestyles=[':', '-', ':'])
-plt.show()
+# Your code here
 ```
 
 
@@ -182,7 +169,7 @@ The coordinates of the support vectors can be found in the `support_vectors_`-at
 
 
 ```python
-clf.support_vectors_
+# Your code here
 ```
 
 
@@ -197,11 +184,7 @@ Now create your plot again but highlight your support vectors.
 
 
 ```python
-plt.scatter(X_11, X_12, c = y_1)
-axes = plt.gca()
-axes.contour(X11_C, X12_C, df1, colors= "black", levels= [-1, 0, 1], linestyles=[':', '-', ':'])
-axes.scatter(clf.support_vectors_[:, 0], clf.support_vectors_[:, 1], facecolors='blue') 
-plt.show()
+# Your code here
 ```
 
 
@@ -214,8 +197,7 @@ The previous example was pretty easy. The 2 "clusters" were easily separable by 
 
 
 ```python
-X_2, y_2 = make_blobs(n_samples=100, n_features=2, centers=2, cluster_std=3,  random_state = 123)
-plt.scatter(X_2[:, 0], X_2[:, 1], c=y_2, s=25);
+# Your code here
 ```
 
 
@@ -226,32 +208,7 @@ Unlike what we've seen in the previous lab, we can just simply use the same SVC 
 
 
 ```python
-plt.scatter(X_2[:, 0], X_2[:, 1], c=y_2, s=25)
-
-from sklearn import svm
-
-clf = svm.SVC(kernel='linear')  #, C=1000000,
-clf.fit(X_2, y_2)
-
-X_21= X_2[:,0]
-X_22= X_2[:,1]
-X21_min, X21_max = X_21.min() - 1, X_21.max() + 1
-X22_min, X22_max = X_22.min() - 1, X_22.max() + 1
-
-x21_coord = np.linspace(X21_min, X21_max, 10)
-x22_coord = np.linspace(X22_min, X22_max, 10)
-
-X22_C, X21_C = np.meshgrid(x22_coord, x21_coord)
-
-x21x22 = np.c_[X21_C.ravel(), X22_C.ravel()]
-
-df2 = clf.decision_function(x21x22)
-df2= df2.reshape(X21_C.shape)
-
-plt.scatter(X_21, X_22, c = y_2)
-axes = plt.gca()
-axes.contour(X21_C, X22_C, df2, colors=["blue","black","blue"], levels= [-1, 0, 1], linestyles=[':', '-', ':'])
-plt.show()
+# Your code here
 ```
 
 
@@ -262,32 +219,7 @@ As you can see, 3 instances are misclassified (1 yellow, 2 purple). We probably 
 
 
 ```python
-plt.scatter(X_2[:, 0], X_2[:, 1], c=y_2, s=25)
-
-from sklearn import svm
-
-clf = svm.SVC(kernel='linear', C = 5000000) 
-clf.fit(X_2, y_2)
-
-X_21= X_2[:,0]
-X_22= X_2[:,1]
-X21_min, X21_max = X_21.min() - 1, X_21.max() + 1
-X22_min, X22_max = X_22.min() - 1, X_22.max() + 1
-
-x21_coord = np.linspace(X21_min, X21_max, 10)
-x22_coord = np.linspace(X22_min, X22_max, 10)
-
-X22_C, X21_C = np.meshgrid(x22_coord, x21_coord)
-
-x21x22 = np.c_[X21_C.ravel(), X22_C.ravel()]
-
-df2 = clf.decision_function(x21x22)
-df2= df2.reshape(X21_C.shape)
-
-plt.scatter(X_21, X_22, c = y_2)
-axes = plt.gca()
-axes.contour(X21_C, X22_C, df2, colors=["blue","black","blue"], levels= [-1, 0, 1], linestyles=[':', '-', ':'])
-plt.show()
+# Your code here
 ```
 
 
@@ -342,90 +274,15 @@ Make sure all these plots have highlighted support vectors, except for LinearCSV
 
 
 ```python
-X1= X[:,0]
-X2= X[:,1]
-X1_min, X1_max = X1.min() - 1, X1.max() + 1
-X2_min, X2_max = X2.min() - 1, X2.max() + 1
-
-x1_coord = np.linspace(X1_min, X1_max, 200)
-x2_coord = np.linspace(X2_min, X2_max, 200)
-
-X2_C, X1_C = np.meshgrid(x2_coord, x1_coord)
-
-x1x2 = np.c_[X1_C.ravel(), X2_C.ravel()]
-
-clf1 = svm.SVC(kernel = "linear",C=1) 
-clf1.fit(X, y)
-Z1 = clf1.predict(x1x2).reshape(X1_C.shape)
-
-clf2 = svm.SVC(kernel = "linear",C=0.1) 
-clf2.fit(X, y)
-Z2 = clf2.predict(x1x2).reshape(X1_C.shape)
-
-clf3 = svm.NuSVC(kernel = "linear",nu=0.7) 
-clf3.fit(X, y)
-Z3 = clf3.predict(x1x2).reshape(X1_C.shape)
-
-clf4 = svm.LinearSVC() 
-clf4.fit(X, y)
-Z4 = clf4.predict(x1x2).reshape(X1_C.shape)
-
-### 
-plt.figure(figsize=(12, 12))
-
-plt.subplot(221)
-plt.title("SVC, C=1")
-axes = plt.gca()
-axes.contourf(X1_C, X2_C, Z1, alpha = 1)
-plt.scatter(X1, X2, c = y, edgecolors = 'k')
-axes.scatter(clf1.support_vectors_[:, 0], clf1.support_vectors_[:, 1], facecolors='blue', edgecolors= 'k') 
-
-plt.subplot(222)
-plt.title("SVC, C=0.1")
-axes = plt.gca()
-axes.contourf(X1_C, X2_C, Z2, alpha = 1)
-plt.scatter(X1, X2, c = y, edgecolors = 'k')
-axes.scatter(clf2.support_vectors_[:, 0], clf2.support_vectors_[:, 1], facecolors='blue', edgecolors= 'k') 
-
-plt.subplot(223)
-plt.title("NuSVC, nu=0.5")
-axes = plt.gca()
-axes.contourf(X1_C, X2_C, Z3, alpha = 1)
-plt.scatter(X1, X2, c = y, edgecolors = 'k')
-axes.scatter(clf3.support_vectors_[:, 0], clf3.support_vectors_[:, 1], facecolors='blue', edgecolors= 'k') 
-
-plt.subplot(224)
-plt.title("LinearSVC")
-axes = plt.gca()
-axes.contourf(X1_C, X2_C, Z4, alpha = 1)
-plt.scatter(X1, X2, c = y, edgecolors = 'k')
-plt.show()
+# Your code here
 ```
-
-
-![png](index_files/index_43_0.png)
-
 
 Now, let's have a look at the coefficients of the decision boundaries. Remember that a simple `SVC` uses a one-vs-one method. this means that for 4 classes, $\dfrac{(4 * 3)}{2}= 6$ decision boundaries are created. The coefficients can be accessed in the attribute `.coef_`. Compare with the coefficients for the LinearSVC. What do you notice?
 
 
 ```python
-print(clf2.coef_)
-
-print(clf4.coef_)
+# Your code here
 ```
-
-    [[ 0.30750887 -0.22003386]
-     [-0.00165148 -0.54016115]
-     [-0.37433577 -0.27813528]
-     [-0.35649837  0.13697254]
-     [-0.19009595 -0.03838317]
-     [-0.55475847 -0.24295554]]
-    [[ 0.02240566 -0.33707085]
-     [-0.34583713  0.19128388]
-     [ 0.02200227 -0.05809006]
-     [ 0.26165316  0.27936273]]
-
 
 ## To non-linear boundaries
 
