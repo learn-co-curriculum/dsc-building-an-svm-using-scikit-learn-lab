@@ -3,6 +3,8 @@
 
 ## Introduction
 
+In the previous lab, you learned how to build an SVM from scratch. Next, you'll learn how to use scikit-learn to create SVMs!
+
 ## Objectives
 
 You will be able to:
@@ -51,7 +53,7 @@ plt.show()
 ```
 
 
-![png](index_files/index_6_0.png)
+![png](index_files/index_7_0.png)
 
 
 ## A model for a perfectly linearly separable data set
@@ -65,7 +67,7 @@ plt.scatter(X_1[:, 0], X_1[:, 1], c = y_1, s=25);
 ```
 
 
-![png](index_files/index_9_0.png)
+![png](index_files/index_10_0.png)
 
 
 We'll start with this data set and fit a simple linear support vector machine on these data. You can use the scikit-learn library `svm` to do so.
@@ -162,7 +164,7 @@ Now, let's plot our data again with the result of svm in it.
 ```
 
 
-![png](index_files/index_26_0.png)
+![png](index_files/index_27_0.png)
 
 
 The coordinates of the support vectors can be found in the `support_vectors_`-attribute. Have a look:
@@ -188,7 +190,7 @@ Now create your plot again but highlight your support vectors.
 ```
 
 
-![png](index_files/index_30_0.png)
+![png](index_files/index_31_0.png)
 
 
 ## When the data is not linearly separable
@@ -201,7 +203,7 @@ The previous example was pretty easy. The 2 "clusters" were easily separable by 
 ```
 
 
-![png](index_files/index_33_0.png)
+![png](index_files/index_34_0.png)
 
 
 Unlike what we've seen in the previous lab, we can just simply use the same SVC function to this problem, as this algorithm automatically allows for slack variables. Repeat the code from above here, and plot the result.
@@ -212,7 +214,7 @@ Unlike what we've seen in the previous lab, we can just simply use the same SVC 
 ```
 
 
-![png](index_files/index_35_0.png)
+![png](index_files/index_36_0.png)
 
 
 As you can see, 3 instances are misclassified (1 yellow, 2 purple). We probably can't do better in this situation, but it's worth to look at changing your hyperparameter C, which can be done in the .SCV command, adding a high value for the argument `C`. Set C = 5,000,000. 
@@ -223,7 +225,7 @@ As you can see, 3 instances are misclassified (1 yellow, 2 purple). We probably 
 ```
 
 
-![png](index_files/index_37_0.png)
+![png](index_files/index_38_0.png)
 
 
 ## Other options in Scikit Learn
@@ -261,7 +263,7 @@ plt.scatter(X[:, 0], X[:, 1], c = y, s=25);
 ```
 
 
-![png](index_files/index_41_0.png)
+![png](index_files/index_42_0.png)
 
 
 Try four different models and plot the results using subplots where:
@@ -296,7 +298,7 @@ plt.show()
 ```
 
 
-![png](index_files/index_47_0.png)
+![png](index_files/index_48_0.png)
 
 
 Let's look at our fourth plot. We can try and draw a line here,  but it's pretty apparent that a linear boundary is not appropriate here. In the next section you'll learn about SVMs with non-linear boundaries!
