@@ -3,6 +3,8 @@
 
 ## Introduction
 
+In the previous lab, you learned how to build an SVM from scratch. Next, you'll learn how to use scikit-learn to create SVMs!
+
 ## Objectives
 
 You will be able to:
