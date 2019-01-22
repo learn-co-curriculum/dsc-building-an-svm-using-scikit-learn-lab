@@ -1,5 +1,5 @@
 
-# Building an SVM using scikit-learn - Lab
+# Building an SVM Using scikit-learn - Lab
 
 ## Introduction
 
