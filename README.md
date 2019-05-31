@@ -1,5 +1,5 @@
 
-# Building an SVM Using scikit-learn - Lab
+# Building an SVM Using sci-kit learn - Lab
 
 ## Introduction
 
@@ -8,10 +8,10 @@ In the previous lab, you learned how to build an SVM from scratch. Here, you'll 
 ## Objectives
 
 You will be able to:
-- Use scikit-learn to build a linear SVM when there are 2 groups
-- Use scikit-learn to build a linear SVM when there are more than 2 groups
+- Use sci-kit learn to build a linear SVM when there are 2 groups
+- Use sci-kit learn to build a linear SVM when there are more than 2 groups
 
-## Generate four data sets in scikit-learn
+## Generate four data sets in sci-kit learn
 
 To start, here's some code using the sci-kit learn dataset generator again. 
 - The first data set contains the same blobs as for the first SVM in the last lab
@@ -296,7 +296,7 @@ plt.show()
 ![png](index_files/index_38_0.png)
 
 
-## Other options in Scikit Learn
+## Other options in sci-kit learn
 
 
 
@@ -449,7 +449,7 @@ Finally, look at the fourth plot. While you can try and draw a line to separate 
 
 ## Additional reading
 
-It is highly recommended to read up on SVMs in the scikit-learn documentation!
+It is highly recommended to read up on SVMs in the sci-kit learn documentation!
 - https://scikit-learn.org/stable/modules/svm.html
 - https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html
 - https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html
