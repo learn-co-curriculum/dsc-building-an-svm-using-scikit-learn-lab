@@ -88,9 +88,9 @@ clf.fit(X_1, y_1)
 
 
     SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
-      decision_function_shape='ovr', degree=3, gamma='auto', kernel='linear',
-      max_iter=-1, probability=False, random_state=None, shrinking=True,
-      tol=0.001, verbose=False)
+      decision_function_shape='ovr', degree=3, gamma='auto_deprecated',
+      kernel='linear', max_iter=-1, probability=False, random_state=None,
+      shrinking=True, tol=0.001, verbose=False)
 
 
 
@@ -114,7 +114,7 @@ clf.coef_
 
 
 
-Next, store the minimum and maximum values of X_11 and X_12, along with some slack (increase the range by 2; 1 slack on either boundary). You'll use these minimum and maximum values to create appropriate scales for plots of the classifier later.
+When we create plots for the classifier later, we're going to want appropriate scale for the axes. In order to do this, we should see what the minimum and maximum values are for the horizontal and vertical axes. To make the plots not feel cramped, we should subtract the minimum by 1 and add 1 to the maximum. Save these values as X11_min , X11_max, X12_min, and X12_max.
 
 
 ```python
@@ -154,7 +154,7 @@ np.shape(x11x12)
 
 
 
-Great! Now we want to get a decision boundary for this particular data set. Use `clf.decision_function()` with your (100,2). It will return the distance to the samples that you generated using `np.meshgrid()`. Make sure you change your shape in a way that you get a (10,10) numpy array.
+Great! Now we want to get a decision boundary for this particular data set. Use `clf.decision_function()` with your (100,2). It will return the distance to the samples that you generated using `np.meshgrid()`. Make sure you change your shape in a way that you get a (10,10) numpy array. *We need to reshape this numpy array because it must be a 2-dimensional shape to function with the `countour()` method you will use in the next plot.*
 
 
 ```python
@@ -164,7 +164,7 @@ df1 = df1.reshape(X12_C.shape)
 
 Now, let's plot our data again with the result of SVM in it. 
 - The first line is simply creating the scatter plot like before
-- Next, you need to specify that what you will do next uses the same axes as the scatter plot. You can do this using `plot.gca()`. Store it in an object and for the remainder you'll use this object to create the lines in your plot
+- Next, you need to specify that what you will do next uses the same axes as the scatter plot. You can do this using `plt.gca()`. Store it in an object and for the remainder you'll use this object to create the lines in your plot
 - Use `.countour()`. The first two argument are the coordinates created usiung the meshgrid, the third argument the result of your decision function call. 
 - You'll want three lines: one decision boundary, and the 2 lines going through the support vectors. Incluse `levels = [-1,0,1]` to get all three.
 
@@ -405,8 +405,12 @@ plt.scatter(X1, X2, c = y, edgecolors = 'k')
 plt.show()
 ```
 
+    /Users/forest.polchow/anaconda3/lib/python3.6/site-packages/sklearn/svm/base.py:931: ConvergenceWarning: Liblinear failed to converge, increase the number of iterations.
+      "the number of iterations.", ConvergenceWarning)
 
-![png](index_files/index_44_0.png)
+
+
+![png](index_files/index_44_1.png)
 
 
 Now, look at the coefficients of the decision boundaries. Remember that a simple `SVC` uses a one-vs-one method. this means that for 4 classes, $\dfrac{(4 * 3)}{2}= 6$ decision boundaries are created. The coefficients can be accessed in the attribute `.coef_`. Compare these with the coefficients for the LinearSVC. What do you notice?
@@ -424,10 +428,10 @@ print(clf4.coef_)
      [-0.35649837  0.13697254]
      [-0.19009595 -0.03838317]
      [-0.55475847 -0.24295554]]
-    [[ 0.02240566 -0.33707085]
-     [-0.34583713  0.19128388]
-     [ 0.02200227 -0.05809006]
-     [ 0.26165316  0.27936273]]
+    [[ 0.02074325 -0.33448999]
+     [-0.34583852  0.19128615]
+     [ 0.02257027 -0.05861326]
+     [ 0.26176772  0.27935203]]
 
 
 ## Non-linear Boundaries
