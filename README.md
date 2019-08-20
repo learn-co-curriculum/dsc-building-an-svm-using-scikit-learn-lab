@@ -124,6 +124,8 @@ Now it's time to fit a simple linear support vector machine on this data. The pr
 - save the SVC-method (which stands for Support Vector Classification) with `kernel='linear'` as the only argument.
 - call the `.fit()` method with the data as the first argument and the labels as the second. 
 
+> Note: Typically you should scale data when fitting an SVM model. This is because if some variables have a larger scale than others, they will dominate variables that are on a smaller scale. To read more about this, check out page 3 of [this paper](https://www.csie.ntu.edu.tw/~cjlin/papers/guide/guide.pdf). Because these variables are all on a similar scale, we will not apply standardization. However, when performing SVM on a real-world dataset, you should ALWAYS scale the data before fitting a model. 
+
 
 
 ```python
