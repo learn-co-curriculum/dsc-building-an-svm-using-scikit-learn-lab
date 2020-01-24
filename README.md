@@ -76,7 +76,7 @@ X_2, y_2 = make_blobs(n_samples=100, n_features=2, centers=2, cluster_std=3,  ra
 plt.scatter(X_2[:, 0], X_2[:, 1], c = y_2, s=25)
 
 plt.subplot(223)
-plt.title('Four blobs with Varying Separability')
+plt.title('Four Blobs with Varying Separability')
 X_3, y_3 = make_blobs(n_samples=100, n_features=2, centers=4, cluster_std=1.6,  random_state=123)
 plt.scatter(X_3[:, 0], X_3[:, 1], c=y_3, s=25)
 
@@ -115,7 +115,7 @@ plt.scatter(X_1[:, 0], X_1[:, 1], c=y_1, s=25);
 
 Now it's time to fit a simple linear support vector machine model on this data. The process is very similar to other scikit-learn models you have built so far: import the class, instantiate, fit, and predict. 
 
-- Import `SCV` from scikit-learn's `svm` module 
+- Import `SVC` from scikit-learn's `svm` module 
 - Instantiate `SVC` (which stands for Support Vector Classification) with `kernel='linear'` as the only argument 
 - Call the `.fit()` method with the data as the first argument and the labels as the second. 
 
@@ -182,7 +182,7 @@ X_11= X_1[:, 0]
 X_12= X_1[:, 1]
 ```
 
-When we create plots for the classifier later, we're going to want appropriate scale for the axes. In order to do this, we should see what the minimum and maximum values are for the horizontal and vertical axes. To make the plots not feel cramped, we will subtract the minimum by 1 and add 1 to the maximum. Save these values as `X11_min`, `X11_max`, `X12_min`, and `X12_max`. 
+When we create plots for the classifier later, we're going to want appropriate scales for the axes. In order to do this, we should see what the minimum and maximum values are for the horizontal and vertical axes. To make the plots not feel cramped, we will subtract the minimum by 1 and add 1 to the maximum. Save these values as `X11_min`, `X11_max`, `X12_min`, and `X12_max`. 
 
 
 ```python
@@ -215,7 +215,7 @@ x11_coord = np.linspace(X11_min, X11_max, 10)
 x12_coord = np.linspace(X12_min, X12_max, 10)
 ```
 
-Now, you'll create an entire grid of points by combining these two arrays using NumPy's `meshgrid()` function. It's a straightforward function, but feel free to pull up the documentation if you haven't worked with it before.
+Now you'll create an entire grid of points by combining these two arrays using NumPy's `meshgrid()` function. It's a straightforward function, but feel free to pull up the documentation if you haven't worked with it before.
 
 
 ```python
@@ -255,7 +255,7 @@ np.shape(x11x12)
 
 
 
-Great! Now we want to get a decision boundary for this particular dataset. Call `clf.decision_function()` on `x11x12`. It will return the distance to the samples that you generated using `np.meshgrid()`. You need to then change the result's shape in a way that you get a (10,10) numpy array. *We need to reshape this numpy array because it must be a 2-dimensional shape to function with the `countour()` method you will use in the next plot.*
+Great! Now we want to get a decision boundary for this particular dataset. Call `clf.decision_function()` on `x11x12`. It will return the distance to the samples that you generated using `np.meshgrid()`. You need to then change the result's shape in a way that you get a (10,10) numpy array. *We need to reshape this numpy array because it must be a 2-dimensional shape to function with the `contour()` method you will use in the next plot.*
 
 
 ```python
@@ -272,9 +272,9 @@ df1 = df1.reshape(X12_C.shape)
 Now, let's plot our data again with the result of SVM in it. This is what the following code does, all you need to do is run it. 
 
 - The first line is simply creating the scatter plot like before
-- Next, we specify that what will do next uses the same axes as the scatter plot. We can do this using `plt.gca()`. Store it in an object and we'll use this object to create the lines in the plot 
-- Then we use `.countour()`. The first two argument are the coordinates created usiung the meshgrid, the third argument the result of your decision function call  
-- We'll want three lines: one decision boundary, and the two lines going through the support vectors. We include `levels = [-1,0,1]` to get all three 
+- Next, we specify that what we'll do next uses the same axes as the scatter plot. We can do this using `plt.gca()`. Store it in an object and we'll use this object to create the lines in the plot 
+- Then we use `.countour()`. The first two arguments are the coordinates created using the meshgrid, the third argument is the result of your decision function call  
+- We'll want three lines: one decision boundary line and the two lines going through the support vectors. We include `levels = [-1,0,1]` to get all three 
 
 
 ```python
@@ -407,7 +407,7 @@ plt.show()
 ![png](index_files/index_52_0.png)
 
 
-As you can see, three instances are misclassified (1 yellow, 2 purple). It may not be possible to improve this, but it's worth experimenting with by changing your hyperparameter `C`, which can be done when initializing the classifier. Try it out now; reinstantiate a model object, adding a high value for the argument `C`. Specifically, set C = 5,000,000. Then refit the classifier and draw the updated decision boundary.
+As you can see, three instances are misclassified (1 yellow, 2 purple). It may not be possible to improve this, but it's worth experimenting with by changing your hyperparameter `C`, which can be done when initializing the classifier. Try it out now; re-instantiate a model object, adding a high value for the argument `C`. Specifically, set C = 5,000,000. Then refit the classifier and draw the updated decision boundary.
 
 
 ```python
@@ -459,7 +459,7 @@ If you dig deeper into scikit-learn, you'll notice that there are several ways t
     - `LinearSVC` uses the one-vs-all (also known as one-vs-rest) multiclass reduction while `SVC` uses the one-vs-one multiclass reduction (this is important only when having > 2 classes!)
 - `svm.NuSVC()`, which is again very similar,
     - Does have a "kernel" argument
-    - `SVC` and `NuSVC` are essentially the same thing, except that for `nuSVC`, `C` is reparametrized into `nu`. The advantage of this is that where `C` has no bounds and can be any positive number, `nu` always lies between 0 and 1  
+    - `SVC` and `NuSVC` are essentially the same thing, except that for `NuSVC`, `C` is reparametrized into `nu`. The advantage of this is that where `C` has no bounds and can be any positive number, `nu` always lies between 0 and 1  
     - One-vs-one multiclass approach 
     
     
@@ -468,7 +468,7 @@ So what does one-vs-one mean? What does one-vs-all mean?
 - One-vs-one means that with $n$ classes, $\dfrac{(n)*(n-1)}{2}$ boundaries are constructed! 
 - One-vs-all means that when there are $n$ classes, $n$ boundaries are created.
 
-The difference between these three types of classifiers is mostly small, but generally visible for datasets with 3+ classes. Have a look at our third example and see how the results differ!
+The difference between these three types of classifiers is mostly small but generally visible for datasets with 3+ classes. Have a look at our third example and see how the results differ!
 
 ## Classifying four classes
 
@@ -501,7 +501,7 @@ Try four different models and plot the results using subplots where:
     - The third one is a NuSVC with nu= 0.7
     - The fourth one is a LinearSVC (no arguments)
     
-Make sure all these plots have highlighted support vectors, except for LinearCSV (this algorithm doesn't have the attribute `.support_vectors_`.   
+Make sure all these plots have highlighted support vectors, except for LinearSVC (this algorithm doesn't have the attribute `.support_vectors_`).   
 Additionally, be sure to use `contourf()`, instead of `contour()` to get filled contour plots.
 
 
@@ -634,7 +634,7 @@ plt.show()
 ![png](index_files/index_69_0.png)
 
 
-Finally, look at the fourth plot. While you can try and draw a line to separate the classes, it's fairly apparent that a linear boundary is not appropriate. In the next section you'll learn about SVMs with non-linear boundaries!
+Finally, look at the fourth plot. While you can try and draw a line to separate the classes, it's fairly apparent that a linear boundary is not appropriate. In the next section, you'll learn about SVMs with non-linear boundaries!
 
 ## Additional reading
 
@@ -646,4 +646,4 @@ It is highly recommended to read up on SVMs in the scikit-learn documentation!
 
 ## Summary
 
-In this lesson you explored and practiced how to use scikit-learn to build linear support vector machines. In the next lesson, you'll learn how SVMs can be extended to have non-linear boundaries.
+In this lesson, you explored and practiced how to use scikit-learn to build linear support vector machines. In the next lesson, you'll learn how SVMs can be extended to have non-linear boundaries.
